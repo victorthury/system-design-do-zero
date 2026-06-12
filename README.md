@@ -17,6 +17,8 @@
 1. [O que é system design](#o-que-é-system-design)
 2. [Latência e throughput](#latência-e-throughput-vazão)
 3. [Performance e escalabilidade](#performance-e-escalabilidade)
+   3.1 [Escalabilidade horizontal e vertical](#escalabilidade-horizontal-e-vertical)
+4. [Teorema CAP](#teorema-cap)
 
 ## O que é system design?
 
@@ -66,6 +68,36 @@ Um serviço pode escalar dessas duas formas:
 - **Horizontalmente**: você tem uma máquina com 4GB de RAM e decide ter mais 3 máquinas de mesma configuração
 
 Veja que nos dois casos temos 16GB de RAM. Mas escalar verticalmente tem um limite, uma hora você atingirá o limite de RAM, enquanto escalar horizontalmente permite adicionar máquinas mais fracas até atender a demanda.
+
+## Teorema CAP
+
+Este teorema diz que, em sistemas distribuídos, será garantido apenas duas das letras da sigla, que significam:
+
+- **Consistência**: Toda leitura recebe a escrita mais recente ou um erro
+- **Disponibilidade (Availability)**: Toda requisição recebe uma resposta, mesmo que o dado não seja a versão mais recente
+- **Tolerância a partições (Partition Tolerance)**: Ou tolerância a falhas de partição, diz respeito que o sistema continua operando apesar de haver falha de comunicação de red entres nós. Ex: dois servidores que não conseguem comunicar entre si.
+
+Como a comunicação de rede não é confiável, a tolerância a partições será uma escolha obrigatória. Portanto, teremos que ver qual se encaixa melhor no nosso sistema.
+
+### CP (Consistência e tolerância a partição)
+
+Neste caso estamos priorizando que o dado seja fresco, caso tenha problema de comunicação entre nós, é preferível retornar um erro do que um dado desatualizado.
+
+**Quando utilizar?**
+
+Sistemas bancário são um ótimo exemplo, nenhum cliente quer ver seu saldo bancário desatualizado.
+
+### AP (Disponibilidade e tolerância a partição)
+
+Aqui estamos optando por sempre mostrar o dado, mesmo se ele não for o mais atual. Escritas podem demorar pra propagar até que se resolva o problema com a partição.
+
+**Quando utilizar?**
+
+É bom quando o sistema precisa funcionar mesmo com erros externos acontecendo ou quando é permitido ter consistência eventual.
+
+### Referência
+
+- [CAP Theorem: Revisited](https://robertgreiner.com/cap-theorem-revisited)
 
 ## Referências:
 
