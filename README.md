@@ -71,21 +71,21 @@ Veja que nos dois casos temos 16GB de RAM. Mas escalar verticalmente tem um limi
 
 ## Teorema CAP
 
-Este teorema diz que, em sistemas distribuídos, será garantido apenas duas das letras da sigla, que significam:
+Este teorema diz que, em sistemas distribuídos, serão garantidas apenas duas das letras da sigla, que significam:
 
 - **Consistência**: Toda leitura recebe a escrita mais recente ou um erro
 - **Disponibilidade (Availability)**: Toda requisição recebe uma resposta, mesmo que o dado não seja a versão mais recente
-- **Tolerância a partições (Partition Tolerance)**: Ou tolerância a falhas de partição, diz respeito que o sistema continua operando apesar de haver falha de comunicação de red entres nós. Ex: dois servidores que não conseguem comunicar entre si.
+- **Tolerância a partições (Partition Tolerance)**: Ou tolerância a falhas de partição, diz respeito que o sistema continua operando apesar de haver falha de comunicação de rede entre nós. Ex: dois servidores que não conseguem comunicar entre si.
 
 Como a comunicação de rede não é confiável, a tolerância a partições será uma escolha obrigatória. Portanto, teremos que ver qual se encaixa melhor no nosso sistema.
 
 ### CP (Consistência e tolerância a partição)
 
-Neste caso estamos priorizando que o dado seja fresco, caso tenha problema de comunicação entre nós, é preferível retornar um erro do que um dado desatualizado.
+Neste caso estamos priorizando que o dado seja o mais recente. aso tenha problema de comunicação entre nós, é preferível retornar um erro do que um dado desatualizado.
 
 **Quando utilizar?**
 
-Sistemas bancário são um ótimo exemplo, nenhum cliente quer ver seu saldo bancário desatualizado.
+Sistemas bancários são um ótimo exemplo, nenhum cliente quer ver seu saldo bancário desatualizado.
 
 ### AP (Disponibilidade e tolerância a partição)
 
