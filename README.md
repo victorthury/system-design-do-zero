@@ -14,11 +14,69 @@
 
 ## Sumário
 
-1. [O que é system design](#o-que-é-system-design)
-2. [Latência e throughput](#latência-e-throughput-vazão)
-3. [Performance e escalabilidade](#performance-e-escalabilidade)
-   3.1 [Escalabilidade horizontal e vertical](#escalabilidade-horizontal-e-vertical)
-4. [Teorema CAP](#teorema-cap)
+## Sumário
+
+- [System Design do Zero](#system-design-do-zero)
+  - [Motivação](#motivação)
+  - [Sumário](#sumário)
+  - [Sumário](#sumário-1)
+  - [O que é system design?](#o-que-é-system-design)
+  - [Latência e throughput (vazão)](#latência-e-throughput-vazão)
+  - [Performance e escalabilidade](#performance-e-escalabilidade)
+    - [Escalabilidade horizontal e vertical](#escalabilidade-horizontal-e-vertical)
+  - [Teorema CAP](#teorema-cap)
+    - [CP (Consistência e tolerância a partição)](#cp-consistência-e-tolerância-a-partição)
+    - [AP (Disponibilidade e tolerância a partição)](#ap-disponibilidade-e-tolerância-a-partição)
+    - [Referência](#referência)
+  - [Banco de dados](#banco-de-dados)
+    - [Relacional (SQL)](#relacional-sql)
+      - [Conceitos Fundamentais](#conceitos-fundamentais)
+        - [ACID](#acid)
+        - [Normalização vs Desnormalização](#normalização-vs-desnormalização)
+      - [Performance e Operações](#performance-e-operações)
+        - [Índices](#índices)
+        - [Connection pooling](#connection-pooling)
+        - [Problema N+1](#problema-n1)
+        - [Paginação: cursor vs offset](#paginação-cursor-vs-offset)
+        - [Lock otimista e pessimista](#lock-otimista-e-pessimista)
+      - [Replicação](#replicação)
+      - [Sharding](#sharding)
+      - [Federation](#federation)
+    - [Não relacional (NoSQL)](#não-relacional-nosql)
+      - [BASE](#base)
+      - [Chave Valor (Key Value)](#chave-valor-key-value)
+      - [Orientado a Documento](#orientado-a-documento)
+      - [Colunar](#colunar)
+      - [Orientado a grafos](#orientado-a-grafos)
+      - [Vetoriais](#vetoriais)
+    - [SQL ou NoSQL](#sql-ou-nosql)
+  - [Cache](#cache)
+  - [CDN](#cdn)
+  - [Blob Store](#blob-store)
+  - [Filas e Assincronicidade](#filas-e-assincronicidade)
+  - [Eventos](#eventos)
+    - [Event Driven](#event-driven)
+    - [Event Sourcing](#event-sourcing)
+    - [CQRS](#cqrs)
+    - [SAGA](#saga)
+      - [Workflow Engines](#workflow-engines)
+  - [Load Balancer](#load-balancer)
+  - [API Gateway](#api-gateway)
+  - [Comunicação (Networking)](#comunicação-networking)
+    - [HTTP e REST](#http-e-rest)
+    - [RPC e gRPC](#rpc-e-grpc)
+    - [GraphQL](#graphql)
+  - [](#)
+  - [Um pouco sobre segurança](#um-pouco-sobre-segurança)
+    - [WAF](#waf)
+    - [OWASP top 10](#owasp-top-10)
+  - [Estimativas](#estimativas)
+    - [Littles law](#littles-law)
+    - [Back of envelop (conta de padeiro)](#back-of-envelop-conta-de-padeiro)
+  - [Microsserviços e Monolitos](#microsserviços-e-monolitos)
+  - [Referências:](#referências)
+  - [Recomendação de leituras:](#recomendação-de-leituras)
+  - [Recomendação de canais do YouTube sobre o tópico](#recomendação-de-canais-do-youtube-sobre-o-tópico)
 
 ## O que é system design?
 
@@ -99,9 +157,113 @@ Aqui estamos optando por sempre mostrar o dado, mesmo se ele não for o mais atu
 
 - [CAP Theorem: Revisited](https://robertgreiner.com/cap-theorem-revisited)
 
+## Banco de dados
+
+Um banco de dados é um sistema que permite armazenar, organizar e recuperar
+dados de forma eficiente e persistente. Mas por que não usar alternativas mais
+simples? Algumas opções têm trade-offs que não estamos dispostos a aceitar:
+
+- **Memória**: é cara e volátil. Quando a aplicação cair, tudo é perdido.
+- **Arquivos CSV ou planilhas**: conforme os dados crescem, operações de leitura
+  e escrita ficam inviáveis, além de não suportarem relações entre os dados
+  nativamente.
+
+Essas alternativas só fazem sentido em algo muito pequeno. Para soluções
+robustas, precisamos de algo à altura.
+
+### Relacional (SQL)
+
+#### Conceitos Fundamentais
+
+##### ACID
+
+##### Normalização vs Desnormalização
+
+#### Performance e Operações
+
+##### Índices
+
+##### Connection pooling
+
+##### Problema N+1
+
+##### Paginação: cursor vs offset
+
+##### Lock otimista e pessimista
+
+#### Replicação
+
+#### Sharding
+
+#### Federation
+
+### Não relacional (NoSQL)
+
+#### BASE
+
+#### Chave Valor (Key Value)
+
+#### Orientado a Documento
+
+#### Colunar
+
+#### Orientado a grafos
+
+#### Vetoriais
+
+### SQL ou NoSQL
+
+## Cache
+
+## CDN
+
+## Blob Store
+
+## Filas e Assincronicidade
+
+## Eventos
+
+### Event Driven
+
+### Event Sourcing
+
+### CQRS
+
+### SAGA
+
+#### Workflow Engines
+
+## Load Balancer
+
+## API Gateway
+
+## Comunicação (Networking)
+
+### HTTP e REST
+
+### RPC e gRPC
+
+### GraphQL
+
+##
+
+## Um pouco sobre segurança
+
+### WAF
+
+### OWASP top 10
+
+## Estimativas
+
+### Littles law
+
+### Back of envelop (conta de padeiro)
+
+## Microsserviços e Monolitos
+
 ## Referências:
 
-- [The System Design Primer](https://github.com/donnemartin/system-design-primer#the-system-design-primer) - Esse repositório foi a
+- [The System Design Primer](https://github.com/donnemartin/system-design-primer#the-system-design-primer): Esse repositório foi a
   inspiração para escrever o System Design do Zero, muito do que é abordado
   aqui é inspirado nele. Tento não ser uma tradução direta, mas há fortes
   influências. Então, se possível, dê estrela para esse repositório.
@@ -110,7 +272,7 @@ Aqui estamos optando por sempre mostrar o dado, mesmo se ele não for o mais atu
 
 - [Os 7 Padrões de System Design que Aparecem em Toda Entrevista](https://newsletter.nagringa.dev/p/padroes-system-design-entrevistas)
 
-## Recomendação de canais do youtube sobre o tópico
+## Recomendação de canais do YouTube sobre o tópico
 
 - [GutoGalego](https://www.youtube.com/@GutoGalego)
 - [Renato Augusto](https://www.youtube.com/@RenatoAugustoTech)
