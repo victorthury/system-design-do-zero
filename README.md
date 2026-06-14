@@ -164,6 +164,24 @@ robustas, precisamos de algo à altura.
 
 ##### ACID
 
+Bancos relacionais vão garantir as propriedades ACID, que são:
+
+- **Atomicidade**: Cada transação tudo ou nada. Se uma transação tem duas etapas, não pode ser executado apenas uma. Ou faz tudo ou nada. Segue exemplo:
+  ``` sql
+  BEGIN;
+
+  UPDATE contas SET saldo = saldo - 500 WHERE id = 1;
+  UPDATE contas SET saldo = saldo + 500 WHERE id = 2;
+
+  COMMIT;
+  ```
+
+- **Consistência**: toda transação leva o banco de dados para um estado válido. Por exemplo, se temos uma tabela que tem uma coluna que exige chave estrangeira obrigatoriamente, não é possível adicionar um registro sem a chave estrangeira. Ou seja, regras estabelecidas são respeitadas.
+
+- **Isolamento**: um transação não interfere na outra. Elas são executadas concorrentemente e terão o mesmo resultado do que executadas serialmente
+
+- **Durabilidade**: Uma vez que uma transação é commitada, a mudança é permanente. Mesmo se cair a energia ou houver falha, mudança será acessível após correção.
+
 ##### Normalização vs Desnormalização
 
 #### Performance e Operações
