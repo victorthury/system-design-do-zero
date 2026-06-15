@@ -202,6 +202,44 @@ Como os bancos relacionais seguem estes princípios, nos é proporcionado garant
 
 ##### Índices
 
+Provavelmente uma das coisas mais importantes em um banco de dados é indexar 
+corretamente o seu banco. Não coloque [cache](#cache) logo de cara, pode ser 
+que seja um problema resolvível com a indexação de dados correta.
+
+Índices são estruturas de dados que o banco de dados utiliza para evitar que seja
+feito um escaneamento da tabela inteira. Ou seja em uma tabela com um bilhão de 
+elementos seria escaneado cada elemento pra retornar os resultados.
+
+Um dos índices mais comuns são as **B-tree** (árvore B) ou as **B+ tree** (árvores B+). Seguem a lógica de uma árvore binária, exceto que cada nó armazena alguns elementos ordenados. Não vou me aprofundar na diferença das duas árvores. Mas são ótimas para rapidamente recuperar a informação e realizar operações de intervalo.
+
+![B-plus-tree](./assets/b-plus-tree.png)
+(fonte: https://en.algorithmica.org/hpc/data-structures/s-tree/)
+
+Segue um exemplo de código:
+
+```sql
+-- B-Tree é criado por padrão
+CREATE INDEX idx_pedidos_data ON pedidos(criado_em);
+
+-- Funciona bem para range queries
+SELECT * FROM pedidos WHERE criado_em BETWEEN '2024-01-01' AND '2024-12-31';
+```
+
+As operações de leitura da B-tree são O(log(n))
+
+Se o problema requer igualdade, como procurar por CPF (não faz sentido ordernar), então o **índice hash** vai ser muito útil. Extremamente rápido por ser O(1).
+
+``` sql
+CREATE INDEX idx_usuarios_cpf ON usuarios USING HASH (cpf);
+
+-- Ótimo para isso:
+SELECT * FROM usuarios WHERE cpf = '12345678900';
+
+-- Não funciona para isso:
+SELECT * FROM usuarios WHERE cpf > '12345678900';
+```
+
+
 ##### Connection pooling
 
 ##### Problema N+1
