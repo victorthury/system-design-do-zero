@@ -178,9 +178,23 @@ Bancos relacionais vão garantir as propriedades ACID, que são:
 
 - **Consistência**: toda transação leva o banco de dados para um estado válido. Por exemplo, se temos uma tabela que tem uma coluna que exige chave estrangeira obrigatoriamente, não é possível adicionar um registro sem a chave estrangeira. Ou seja, regras estabelecidas são respeitadas.
 
-- **Isolamento**: um transação não interfere na outra. Elas são executadas concorrentemente e terão o mesmo resultado do que executadas serialmente
+  ``` sql
+  CREATE TABLE pedidos (
+    id         SERIAL PRIMARY KEY,
+    cliente_id INT NOT NULL REFERENCES clientes(id)
+  );
+
+  -- Falha se cliente_id 999 não existir em clientes
+  INSERT INTO pedidos (cliente_id) VALUES (999);
+  -- ERROR: insert or update on table "pedidos" violates foreign key constraint
+  ```
+
+- **Isolamento**: uma transação não interfere na outra. Elas são executadas concorrentemente e terão o mesmo resultado do que executadas serialmente
 
 - **Durabilidade**: Uma vez que uma transação é commitada, a mudança é permanente. Mesmo se cair a energia ou houver falha, mudança será acessível após correção.
+
+
+Como os bancos relacionais seguem estes princípios, nos é proporcionado garantias de integridade e confiabilidade sobre os dados, sendo excelentes para sistemas que precisam de consistência. Esses princípios fazem o modelo relacional ideal para aplicações financeiras e e-commerce.
 
 ##### Normalização vs Desnormalização
 
